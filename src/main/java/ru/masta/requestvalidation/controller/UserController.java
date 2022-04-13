@@ -7,6 +7,7 @@ import ru.masta.requestvalidation.dto.UserRequest;
 import ru.masta.requestvalidation.entity.User;
 import ru.masta.requestvalidation.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping ("/add_user")
-    public ResponseEntity<User> saveUser(@RequestBody UserRequest userRequest){
+    public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest){
         return new ResponseEntity(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 
