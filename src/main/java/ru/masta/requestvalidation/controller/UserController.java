@@ -5,7 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.masta.requestvalidation.dto.UserRequest;
 import ru.masta.requestvalidation.entity.User;
-import ru.masta.requestvalidation.service.UserService;
+import ru.masta.requestvalidation.exception.UserNotFoundException;
+import ru.masta.requestvalidation.dto.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable int id){
+    public ResponseEntity<User> getById(@PathVariable int id) throws UserNotFoundException {
         return ResponseEntity.ok(service.findById(id));
     }
 

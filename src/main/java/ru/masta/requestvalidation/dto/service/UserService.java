@@ -1,8 +1,9 @@
-package ru.masta.requestvalidation.service;
+package ru.masta.requestvalidation.dto.service;
 
 import org.springframework.stereotype.Service;
 import ru.masta.requestvalidation.dto.UserRequest;
 import ru.masta.requestvalidation.entity.User;
+import ru.masta.requestvalidation.exception.UserNotFoundException;
 import ru.masta.requestvalidation.repository.UserRepository;
 
 import java.util.List;
@@ -30,8 +31,14 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User findById(int id) {
+    public User findById(int id) throws UserNotFoundException{
         User user = repository.findByUserId(id);
-        return user;
+
+        if(user!=null){
+            return user;
+        }else{
+            throw new UserNotFoundException("user not found with id: " + id);
+        }
+
     }
 }
